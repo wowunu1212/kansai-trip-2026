@@ -5,17 +5,132 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>2026 關西旅行｜10/15–10/19</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;background:#f7f4ef;color:#333;line-height:1.65}
-header{background:linear-gradient(135deg,#d9e9e2,#f4dfcf);padding:38px 20px;text-align:center}
-h1{margin:0;font-size:30px} .sub{margin-top:8px;color:#666}
-.wrap{max-width:760px;margin:0 auto;padding:20px 14px 50px}
-.card{background:#fff;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 4px 18px #0000000d}
-.day{display:inline-block;background:#333;color:#fff;border-radius:20px;padding:3px 12px;font-size:14px}
-h2{margin:8px 0 4px;font-size:23px}.date{color:#888;font-size:14px}
-.item{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid #eee}.item:last-child{border:0}
-.time{font-weight:700;min-width:62px}.tag{font-size:14px;color:#666}
-.info{background:#faf7f1}.important{border-left:5px solid #d99a6c}
-footer{text-align:center;color:#999;font-size:13px;margin-top:28px}
+  /* 基礎重設 */
+  *{box-sizing:border-box}
+  
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;
+    background:#f7f4ef;
+    color:#333;
+    line-height:1.65;
+    /* 修正手機版可能出現的字體自動放大問題 */
+    -webkit-text-size-adjust: 100%; 
+  }
+
+  header{
+    background:linear-gradient(135deg,#d9e9e2,#f4dfcf);
+    /* 縮小手機版的內邊距，避免佔用太多空間 */
+    padding:25px 15px; 
+    text-align:center;
+  }
+
+  h1{margin:0;font-size:26px} /* 手機版標題稍微縮小 */
+  
+  .sub{
+    margin-top:8px;
+    color:#666;
+    font-size:14px; /* 手機版副標題稍微縮小 */
+    word-break: break-all; /* 防止長文字在手機上撐破頭部 */
+  }
+
+  /* 核心修正：將最大寬度設為 100%，並調整邊距 */
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:10px 10px 50px; /* 手機版左右邊距縮小，留給內容更多空間 */
+  }
+
+  .card{
+    background:#fff;
+    border-radius:18px;
+    padding:15px; /* 手機版卡片內邊距稍微縮小 */
+    margin:12px 0; /* 卡片間距稍微縮小 */
+    box-shadow:0 4px 18px #0000000d;
+    word-wrap: break-word; /* 確保內容不會超出卡片 */
+  }
+
+  .day{
+    display:inline-block;
+    background:#333;
+    color:#fff;
+    border-radius:20px;
+    padding:3px 12px;
+    font-size:14px;
+    margin-bottom: 5px; /* D1、D2下方留白 */
+  }
+
+  h2{margin:8px 0 4px;font-size:20px} /* 手機版 h2 稍微縮小 */
+  
+  .date{
+    color:#888;
+    font-size:14px;
+    margin-bottom: 5px; /* 日期下方留白 */
+  }
+
+  .item{
+    display:flex;
+    gap:10px; /* gap 手機版稍微縮小 */
+    padding:11px 0;
+    border-bottom:1px solid #eee;
+    /* 確保 item 內部的項目垂直排列在需要時 */
+    flex-wrap: wrap; 
+  }
+  
+  .item:last-child{border:0}
+  
+  .time{
+    font-weight:700;
+    min-width:62px;
+    /* 確保時間佔滿一行，或者在窄螢幕上不被擠壓 */
+    flex-shrink: 0;
+  }
+  
+  /* 用於處理景點圖片、子項目的樣式 */
+  .content {
+    flex: 1 1 0%; /* 讓內容區域自動填滿剩餘空間 */
+    min-width: 0; /* 防止子項目撐開 flex 容器 */
+  }
+
+  .tag{font-size:14px;color:#666}
+  
+  .info{background:#faf7f1}
+  
+  .important{border-left:5px solid #d99a6c}
+
+  /* 🔥核心修正：強制圖片自適應手機螢幕🔥 */
+  img{
+    /* 圖片最大寬度為卡片的 100% */
+    max-width: 100%; 
+    /* 高度自動調整，保持比例 */
+    height: auto; 
+    /* 確保圖片是區塊元素 */
+    display: block; 
+    margin-top: 8px;
+    border-radius: 8px;
+    /* 如果你想限制圖片在電腦版的最高寬度，可以使用這個： */
+    /* max-width: 480px; */ 
+  }
+
+  .sub-item {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #555;
+    padding-left: 10px;
+    border-left: 2px solid #eee;
+    margin-bottom: 4px;
+  }
+
+  footer{text-align:center;color:#999;font-size:13px;margin-top:28px}
+
+  /* 針對極窄螢幕（如舊款手機）的調整 */
+  @media (max-width: 320px) {
+    h1 { font-size: 22px; }
+    h2 { font-size: 18px; }
+    .wrap { padding: 5px; }
+    .item { gap: 5px; }
+    .time { min-width: 50px; font-size: 14px; }
+  }
 </style>
 </head>
 <body>
@@ -35,140 +150,167 @@ footer{text-align:center;color:#999;font-size:13px;margin-top:28px}
 </section>
 
 <section class="card">
-<span class="day">D1</span><div class="date">10/15（四）</div>
+<span class="day">D1</span>
+<div class="date">10/15（四）</div>
 <h2>抵達大阪｜心齋橋</h2>
-<div class="item"><div class="time">05:00</div><div>抵達高雄機場，準備搭機</div></div>
-<div class="item"><div class="time">07:00</div><div>✈️ IT284 高雄 → 關西</div></div>
-<div class="item"><div class="time">10:55</div><div>🛬 抵達關西機場</div></div>
-<div class="item"><div class="time">上午</div><div>🧳  RINKU PREMIUM OUTLETS 行李寄放後購物 中餐美食街→ 結束後前往大阪</div></div>
-<div class="item"><div class="time">下午</div><div>🏨 飯店 Via Inn Shinsaibashi、整理行李 休息</div></div>
-<div class="item"><div class="time">晚上</div><div>🍲 晚餐すき焼き藤もと 壽喜燒 訂位18:15／心齋橋</div></div>
-
+<div class="item"><div class="time">05:00</div><div class="content">抵達高雄機場，準備搭機</div></div>
+<div class="item"><div class="time">07:00</div><div class="content">✈️ IT284 高雄 → 關西</div></div>
+<div class="item"><div class="time">10:55</div><div class="content">🛬 抵達關西機場</div></div>
+<div class="item"><div class="time">上午</div><div class="content">🧳 RINKU PREMIUM OUTLETS 行李寄放後購物 中餐美食街→ 結束後前往大阪</div></div>
+<div class="item"><div class="time">下午</div><div class="content">🏨 飯店 Via Inn Shinsaibashi、整理行李 休息</div></div>
+<div class="item"><div class="time">晚上</div><div class="content">🍲 晚餐すき焼き藤もと 壽喜燒 訂位18:15／心齋橋</div></div>
+</section>
 
 <section class="card">
-<span class="day">D2</span><div class="date">10/16（五）</div>
+<span class="day">D2</span>
+<div class="date">10/16（五）</div>
 <h2>伏見稻荷＋嵐山小火車＋保津川遊船</h2>
-<div class="item"><div class="time">早餐</div><div>🏨 飯店早餐</div></div>
-<div class="item"><div class="time">08:30</div><div>🚶 飯店出發</div></div>
-<div class="item"><div class="time">09:00</div><div>🚃 前往京都 搭乘09:00京阪電車</div></div>
-<div class="item"><div class="time">10:00</div><div>🦊 伏見稻荷大社<br>
-<img src="images/伏見.jpg" alt="伏見"width="210">
-
+<div class="item"><div class="time">早餐</div><div class="content">🏨 飯店早餐</div></div>
+<div class="item"><div class="time">08:30</div><div class="content">🚶 飯店出發</div></div>
+<div class="item"><div class="time">09:00</div><div class="content">🚃 前往京都 搭乘09:00京阪電車</div></div>
+<div class="item">
+  <div class="time">10:00</div>
+  <div class="content">
+    🦊 伏見稻荷大社
+    <img src="images/伏見.jpg" alt="伏見">
   </div>
 </div>
 
 <div class="item">
     <div class="time">約3小時</div>
-    <div>⛩️ 參拜＋午餐(二擇一)
+    <div class="content">
+      ⛩️ 參拜＋午餐(二擇一)
       <div class="sub-item">📍Salmon Noodle Kyoto(鮭魚拉麵)</div>
       <div class="sub-item">📍洋食屋 スゥリール</div>
     </div>
   </div>
-<div class="item"><div class="time">13:38前</div><div>🚃 前往嵐山／搭乘JR前往京都轉車 </div></div>
+<div class="item"><div class="time">13:38前</div><div class="content">🚃 前往嵐山／搭乘JR前往京都轉車 </div></div>
 <div class="item">
   <div class="time">下午</div>
-  <div>🚂 嵯峨野小火車14:05發車 車程約 20 分鐘</div>
-  <div class="sub-item">抵達後轉乘接駁車</div>
+  <div class="content">
+    🚂 嵯峨野小火車14:05發車 車程約 20 分鐘
+    <div class="sub-item">抵達後轉乘接駁車</div>
+  </div>
 </div>
 <div class="item">
   <div class="time"></div>
-  <div>🚢 保津川遊船(90分)</div>
+  <div class="content">🚢 保津川遊船(90分)</div>
 </div>
 <div class="item">
   <div class="time"></div>
-  <div>🎋 嵐山竹林小徑 / 🛍️ 嵐山商店街<br>
-<img src="images/嵐山.jpg" alt="嵐山"width="210">
-
+  <div class="content">
+    🎋 嵐山竹林小徑 / 🛍️ 嵐山商店街
+    <img src="images/嵐山.jpg" alt="嵐山">
   </div>
 </div>
 
 <div class="item">
     <div class="time">返程 </div>
-    <div>🚉 嵐山車站晚餐(二擇一)
+    <div class="content">
+      🚉 嵐山車站晚餐(二擇一)
       <div class="sub-item">📍Saganoya (嵐山車站前)定食 </div>
       <div class="sub-item">📍嵐山咖哩</div>
     </div>
   </div>
 
-<div class="item"><div class="time">晚上</div><div>🏨 返回大阪飯店，休息後會餓可以居酒屋宵夜</div></div>
+<div class="item"><div class="time">晚上</div><div class="content">🏨 返回大阪飯店，休息後會餓可以居酒屋宵夜</div></div>
 </section>
 
 <section class="card">
-<span class="day">D3</span><div class="date">10/17（六）</div>
+<span class="day">D3</span>
+<div class="date">10/17（六）</div>
 <h2>奈良＋宇治</h2>
-<div class="item"><div class="time">上午</div><div>🚃 近鐵難波 → 奈良　約34分鐘</div></div>
-<div class="item"><div class="time">中午</div><div>🦌 奈良散步・中谷堂・東大寺<br>
-<img src="images/奈良.jpg" alt="奈良"width="210">
-
+<div class="item"><div class="time">上午</div><div class="content">🚃 近鐵難波 → 奈良 約34分鐘</div></div>
+<div class="item">
+  <div class="time">中午</div>
+  <div class="content">
+    🦌 奈良散步・中谷堂・東大寺
+    <img src="images/奈良.jpg" alt="奈良">
   </div>
 </div>
 
-<div class="item"><div class="time">下午</div><div>🚃 JR奈良 → 宇治　約43分鐘
-<div class="sub-item">🍵 宇治・平等院・商店街周邊<br>
-<img src="images/宇治.jpg" alt="宇治"width="210">
-
+<div class="item">
+  <div class="time">下午</div>
+  <div class="content">
+    🚃 JR奈良 → 宇治 約43分鐘
+    <div class="sub-item">
+      🍵 宇治・平等院・商店街周邊
+      <img src="images/宇治.jpg" alt="宇治">
+    </div>
+    <div class="sub-item">📍地雞家心 中餐定食系列 </div>      
+    <div class="sub-item">📍蓮華茶屋 </div>
+    <div class="sub-item">📍中村藤吉 平等院店(可以看到河景)</div>
+    <div class="sub-item">📍京鴨kitchen 善 鴨肉漢堡 </div>
   </div>
-
-      <div class="sub-item">📍地雞家心 中餐定食系列 </div>      
-      <div class="sub-item">📍蓮華茶屋 </div>
-      <div class="sub-item">📍中村藤吉 平等院店(可以看到河景)</div>
-      <div class="sub-item">📍京鴨kitchen 善 鴨肉漢堡 </div>
-
-   </div>
- </div>
-<div class="item"><div class="time">晚上</div><div>🏨 京阪電車返回大阪</div></div>
-<div class="item"><div class="time">晚餐</div><div>🏨 🍜 家系ラーメン 頂㐂家 長堀橋店 拉麵</div></div>
+</div>
+<div class="item"><div class="time">晚上</div><div class="content">🏨 京阪電車返回大阪</div></div>
+<div class="item"><div class="time">晚餐</div><div class="content">🏨 🍜 家系ラーメン 頂㐂家 長堀橋店 拉麵</div></div>
 </section>
 
 <section class="card">
-<span class="day">D4</span><div class="date">10/18（日）</div>
+<span class="day">D4</span>
+<div class="date">10/18（日）</div>
 <h2>天橋立＋伊根＋美山</h2>
-<div class="item"><div class="time">06:30</div><div>🚶 飯店出發日本橋車站2號出口
-<div class="sub-item"> ✔️路上超商買早餐及水 </div>
-
-   </div>
- </div>
-
-<div class="item"><div class="time">07:05</div><div>📍 KKday 集合</div></div>
-<div class="item"><div class="time">07:20</div><div>🚌 出發前往天橋立・伊根・美山 車程約2.5小時</div></div>
-<div class="item"><div class="time">09:50</div><div>🛶 伊根舟・屋伊根灣遊覽船 (1小時)<br>
-<img src="images/伊根舟屋1.jpg" alt="伊根舟屋"width="210">
-
+<div class="item">
+  <div class="time">06:30</div>
+  <div class="content">
+    🚶 飯店出發日本橋車站2號出口
+    <div class="sub-item"> ✔️路上超商買早餐及水 </div>
   </div>
 </div>
-<div class="item"><div class="time">11:30</div><div>🌊 天橋立觀景台 2小時(中餐記得預留1小時)<br>
-<img src="images/天橋立.jpg" alt="天橋立"width="210"></div>
-   </div>
- </div>
-<div class="item"><div class="time">中餐</div><div>天橋立商店街
-     <div class="sub-item"> 📍千歲茶屋總店 天婦蘿蕎麥麵 </div>
-     <div class="sub-item"> 📍天の橋立 松吟 </div>
 
-   </div>
-</div>
-<div class="item"><div class="time">09:50</div><div>🏘️ 美山茅屋部落 (40分)<br>
-<img src="images/美山.jpg" alt="美山"width="210">
+<div class="item"><div class="time">07:05</div><div class="content">📍 KKday 集合</div></div>
+<div class="item"><div class="time">07:20</div><div class="content">🚌 出發前往天橋立・伊根・美山 車程約2.5小時</div></div>
+<div class="item">
+  <div class="time">09:50</div>
+  <div class="content">
+    🛶 伊根舟屋・伊根灣遊覽船 (1小時)
+    <img src="images/伊根舟屋1.jpg" alt="伊根舟屋">
   </div>
 </div>
-<div class="item"><div class="time">15:40</div><div>返程車程約2.5小時 </div></div>
+<div class="item">
+  <div class="time">11:30</div>
+  <div class="content">
+    🌊 天橋立觀景台 2小時(中餐記得預留1小時)
+    <img src="images/天橋立.jpg" alt="天橋立">
+  </div>
+</div>
+<div class="item">
+  <div class="time">中餐</div>
+  <div class="content">
+    天橋立商店街
+    <div class="sub-item"> 📍千歲茶屋總店 天婦羅蕎麥麵 </div>
+    <div class="sub-item"> 📍天の橋立 松吟 </div>
+  </div>
+</div>
+<div class="item">
+  <div class="time">15:00</div> /* 這裡修正了原本的時間 09:50 -> 15:00 */
+  <div class="content">
+    🏘️ 美山茅屋部落 (40分)
+    <img src="images/美山.jpg" alt="美山">
+  </div>
+</div>
+<div class="item"><div class="time">15:40</div><div class="content">返程車程約2.5小時 </div></div>
 
-<div class="item"><div class="time">晚餐</div><div>🍽️ 新世界・通天閣
-     <div class="sub-item"> 📍Usagiya 大阪燒 </div>
-     <div class="sub-item"> 📍達摩串炸 </div>
-
-   </div>
+<div class="item">
+  <div class="time">晚餐</div>
+  <div class="content">
+    🍽️ 新世界・通天閣
+    <div class="sub-item"> 📍Usagiya 大阪燒 </div>
+    <div class="sub-item"> 📍達摩串炸 </div>
+  </div>
 </div>
 </section>
 
 <section class="card">
-<span class="day">D5</span><div class="date">10/19（一）</div>
+<span class="day">D5</span>
+<div class="date">10/19（一）</div>
 <h2>大阪 → 關西機場 → 高雄</h2>
-<div class="item"><div class="time">06:30</div><div>🍳 飯店早餐</div></div>
-<div class="item"><div class="time">07:00~7:30</div><div>🧳 回房間整理、退房、飯店出發前往關西機場</div></div>
-<div class="item"><div class="time">09:00</div><div>🛫 抵達機場</div></div>
-<div class="item"><div class="time">12:00</div><div>✈️ IT285 關西 → 高雄</div></div>
-<div class="item"><div class="time">14:00</div><div>🛬 抵達高雄</div></div>
-
+<div class="item"><div class="time">06:30</div><div class="content">🍳 飯店早餐</div></div>
+<div class="item"><div class="time">07:00~7:30</div><div class="content">🧳 回房間整理、退房、飯店出發前往關西機場</div></div>
+<div class="item"><div class="time">09:00</div><div class="content">🛫 抵達機場</div></div>
+<div class="item"><div class="time">12:00</div><div class="content">✈️ IT285 關西 → 高雄</div></div>
+<div class="item"><div class="time">14:00</div><div class="content">🛬 抵達高雄</div></div>
 </section>
 
 <section class="card important">
